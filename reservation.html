@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réserver — Le Saint Esprit · Marseille</title>
+  <link rel="stylesheet" href="assets/css/tokens.css?v=9">
+  <link rel="stylesheet" href="assets/css/main.css?v=9">
+  <style>
+    /* ── Page Réservation ── */
+    .resa-page-hero {
+      background: var(--color-bordeaux);
+      padding-block: calc(var(--space-3xl) + 2rem) var(--space-2xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .resa-page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('assets/images/facade-terrasse-nuit.webp') center 40% / cover;
+      opacity: 0.18;
+    }
+    .resa-hero-inner { position: relative; z-index: 1; }
+    .resa-page-hero h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      color: #fff;
+      margin-bottom: var(--space-sm);
+    }
+    .resa-page-hero p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-lg);
+      color: rgba(255,255,255,0.8);
+    }
+    .resa-label {
+      display: inline-block;
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-stone);
+      margin-bottom: var(--space-sm);
+    }
+
+    /* ── Layout ── */
+    .resa-layout {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: var(--space-xl);
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      align-items: start;
+    }
+
+    /* ── Formulaire ── */
+    .resa-form-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-sm);
+    }
+    .resa-form-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-xs);
+    }
+    .resa-form-sub {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Grille formulaire */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+    .form-label .required { color: var(--color-bordeaux); margin-left: 2px; }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      font-family: var(--font-body);
+      font-size: 16px; /* iOS no-zoom */
+      color: var(--color-text);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+      appearance: none;
+      -webkit-appearance: none;
+      min-height: 44px;
+    }
+    .form-input::placeholder { color: var(--color-text-light); }
+    .form-input:focus-visible,
+    .form-select:focus-visible,
+    .form-textarea:focus-visible {
+      outline: none;
+      border-color: var(--color-bordeaux);
+      box-shadow: 0 0 0 3px rgba(107, 39, 55, 0.12);
+    }
+    .form-input.error { border-color: #C0392B; box-shadow: 0 0 0 2px rgba(192,57,43,0.12); }
+    .form-input.success { border-color: var(--color-encre); }
+    .form-error-msg {
+      font-size: var(--text-xs);
+      color: #C0392B;
+      min-height: 1rem;
+      display: none;
+    }
+    .form-error-msg.show { display: block; }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A6A5A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
+    .form-textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
+
+
+
+    /* Bouton soumettre */
+    .form-submit-wrap { margin-top: var(--space-lg); }
+    .btn-submit {
+      width: 100%;
+      justify-content: center;
+      font-size: var(--text-base);
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-submit::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+    .btn-submit:hover::after { transform: translateX(100%); }
+
+    .form-privacy {
+      margin-top: var(--space-sm);
+      font-size: var(--text-xs);
+      color: var(--color-text-light);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* Confirmation message */
+    .resa-confirm {
+      display: none;
+      text-align: center;
+      padding: var(--space-xl);
+    }
+    .resa-confirm.show { display: block; }
+    .resa-confirm-icon { font-size: 3rem; margin-bottom: var(--space-sm); }
+    .resa-confirm h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-sm);
+    }
+    .resa-confirm p { color: var(--color-text-muted); }
+
+
+
+    /* ── Sidebar infos ── */
+    .resa-sidebar { display: flex; flex-direction: column; gap: var(--space-md); }
+    .info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+    .info-card-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-sm);
+    }
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+    .info-row { display: flex; justify-content: space-between; gap: 1rem; }
+    .info-row strong { color: var(--color-text); font-weight: 500; }
+
+    .info-card-note {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      border-left: 2px solid var(--color-gold);
+      padding-left: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+    .info-tel {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--color-bordeaux);
+      font-size: var(--text-md);
+      margin-top: var(--space-sm);
+    }
+
+    @media (max-width: 768px) {
+      .resa-layout { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+      .resa-page-hero h1 { font-size: var(--text-2xl); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header scrolled" id="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="site-logo"><a href="index.html" aria-label="Accueil">Le Saint Esprit</a></div>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="menu.html">La Carte</a>
+        <a href="histoire.html">L'Histoire</a>
+        <a href="reservation.html" aria-current="page" class="btn btn-outline nav-cta">Réserver</a>
+      </nav>
+      <button class="nav-burger" id="nav-burger" aria-expanded="false" aria-controls="nav-drawer" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Menu de navigation">
+    <a href="index.html" onclick="closeDrawer()">Accueil</a>
+    <a href="menu.html" onclick="closeDrawer()">La Carte</a>
+    <a href="histoire.html" onclick="closeDrawer()">L'Histoire</a>
+    <a href="reservation.html" class="btn btn-primary" onclick="closeDrawer()">Réserver une table</a>
+  </div>
+
+  <main>
+    <section class="resa-page-hero" aria-label="Réserver une table">
+      <div class="container resa-hero-inner">
+        <span class="resa-label">Le Saint Esprit</span>
+        <h1>Réserver une table</h1>
+        <p>Terrasse ombragée sous l'arbre ou salle sous les voûtes séculaires.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="resa-layout">
+
+        <!-- Formulaire -->
+        <div class="reveal">
+          <div class="resa-form-card" id="resa-form-card">
+            <div id="form-wrapper">
+              <h2 class="resa-form-title">Votre réservation</h2>
+              <p class="resa-form-sub">Confirmation rapide par téléphone ou par e-mail sous 24h.</p>
+
+              <form id="resa-form" novalidate aria-label="Formulaire de réservation">
+                <div class="form-grid">
+
+                  <div class="form-group">
+                    <label class="form-label" for="resa-nom">Nom <span class="required" aria-label="obligatoire">*</span></label>
+                    <input class="form-input" type="text" id="resa-nom" name="nom" placeholder="Votre nom" required autocomplete="family-name" minlength="2">
+                    <span class="form-error-msg" id="err-nom" role="alert">Veuillez indiquer votre nom.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="resa-prenom">Prénom <span class="required" aria-label="obligatoire">*</span></label>
+                    <input class="form-input" type="text" id="resa-prenom" name="prenom" placeholder="Votre prénom" required autocomplete="given-name">
+                    <span class="form-error-msg" id="err-prenom" role="alert">Veuillez indiquer votre prénom.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="resa-email">E-mail <span class="required" aria-label="obligatoire">*</span></label>
+                    <input class="form-input" type="email" id="resa-email" name="email" placeholder="votre@email.com" required autocomplete="email">
+                    <span class="form-error-msg" id="err-email" role="alert">E-mail invalide.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="resa-tel">Téléphone <span class="required" aria-label="obligatoire">*</span></label>
+                    <input class="form-input" type="tel" id="resa-tel" name="tel" placeholder="06 xx xx xx xx" required autocomplete="tel">
+                    <span class="form-error-msg" id="err-tel" role="alert">Téléphone requis.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="resa-date">Date <span class="required" aria-label="obligatoire">*</span></label>
+                    <input class="form-input" type="date" id="resa-date" name="date" required>
+                    <span class="form-error-msg" id="err-date" role="alert">Choisissez une date valide.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="resa-heure">Service <span class="required" aria-label="obligatoire">*</span></label>
+                    <select class="form-select" id="resa-heure" name="heure" required>
+                      <option value="" disabled selected>Choisir le service</option>
+                      <optgroup label="Déjeuner (12h00 – 14h30)">
+                        <option value="12:00">12h00</option>
+                        <option value="12:30">12h30</option>
+                        <option value="13:00">13h00</option>
+                        <option value="13:30">13h30</option>
+                      </optgroup>
+                      <optgroup label="Dîner (19h00 – 23h00 / 23h30)">
+                        <option value="19:00">19h00</option>
+                        <option value="19:30">19h30</option>
+                        <option value="20:00">20h00</option>
+                        <option value="20:30">20h30</option>
+                        <option value="21:00">21h00</option>
+                        <option value="21:30">21h30</option>
+                      </optgroup>
+                    </select>
+                    <span class="form-error-msg" id="err-heure" role="alert">Choisissez un service.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="resa-couverts">Nombre de personnes <span class="required" aria-label="obligatoire">*</span></label>
+                    <select class="form-select" id="resa-couverts" name="couverts" required>
+                      <option value="" disabled selected>Combien de convives ?</option>
+                      <option value="1">1 personne</option>
+                      <option value="2">2 personnes</option>
+                      <option value="3">3 personnes</option>
+                      <option value="4">4 personnes</option>
+                      <option value="5">5 personnes</option>
+                      <option value="6">6 personnes</option>
+                      <option value="7+">7 personnes et plus</option>
+                    </select>
+                    <span class="form-error-msg" id="err-couverts" role="alert">Indiquez le nombre de personnes.</span>
+                  </div>
+
+
+                  <div class="form-group full">
+                    <label class="form-label" for="resa-message">Message (allergies, occasion spéciale…)</label>
+                    <textarea class="form-textarea" id="resa-message" name="message" placeholder="Allergies, anniversaire, préférence particulière…"></textarea>
+                  </div>
+
+                </div>
+
+                <div class="form-submit-wrap">
+                  <button type="submit" class="btn btn-primary btn-submit" id="btn-submit">
+                    Envoyer ma demande
+                  </button>
+                  <p class="form-privacy">Vos coordonnées restent strictement confidentielles.</p>
+                </div>
+              </form>
+            </div>
+
+            <!-- État de confirmation -->
+            <div class="resa-confirm" id="resa-confirm" role="status" aria-live="polite">
+              <div class="resa-confirm-icon" aria-hidden="true">🥂</div>
+              <h3>Votre demande est bien reçue !</h3>
+              <p>Nous vous confirmons votre table par e-mail ou téléphone sous 24h.<br>Au plaisir de vous recevoir au Saint Esprit.</p>
+              <a href="index.html" class="btn btn-outline" style="margin-top:var(--space-lg);">Retour à l'accueil</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sidebar informations -->
+        <aside class="resa-sidebar reveal stagger-2" aria-label="Informations pratiques">
+          <!-- Carte photo ambiance -->
+          <div class="info-card" style="padding:0; overflow:hidden;">
+            <img src="assets/images/facade-terrasse-nuit.webp" alt="Terrasse et devanture du Saint Esprit le soir" style="width:100%; height:180px; object-fit:cover; display:block;">
+            <div style="padding:var(--space-md);">
+              <h4 style="font-family:var(--font-display); font-size:var(--text-md); margin-bottom:0.25rem;">L'ambiance au Refuge</h4>
+              <p style="font-size:var(--text-xs); color:var(--color-text-muted); line-height:1.5;">Terrasse conviviale sous les ruelles du Panier ou salle chaleureuse sous les voûtes séculaires.</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3 class="info-card-title">Horaires</h3>
+            <ul class="info-list" aria-label="Horaires d'ouverture">
+              <li class="info-row"><span>Vendredi</span><strong>12h–14h30 · 19h–23h30</strong></li>
+              <li class="info-row"><span>Samedi</span><strong>12h–14h30 · 19h–23h00</strong></li>
+              <li class="info-row"><span>Dimanche</span><strong>12h–14h30 · 19h–23h00</strong></li>
+              <li class="info-row"><span>Lundi</span><strong>12h–14h30 · 19h–23h00</strong></li>
+              <li class="info-row"><span>Mardi à Jeudi</span><strong style="color:var(--color-stone);">Fermé</strong></li>
+            </ul>
+            <p class="info-card-note">Pour les réservations de groupe (7 personnes et plus), merci de nous joindre directement par téléphone.</p>
+          </div>
+
+          <div class="info-card">
+            <h3 class="info-card-title">Contact direct</h3>
+            <ul class="info-list">
+              <li><a class="info-tel" href="tel:+33961293043" aria-label="Appeler le restaurant">☎ 09 61 29 30 43</a></li>
+              <li><address style="font-style:normal;">16 Rue du Refuge<br>13002 Marseille — Le Panier</address></li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+    <!-- ── Section Localisation & Carte (fond contrasté pleine largeur) ── -->
+    <section class="resa-map-section reveal" aria-label="Plan d'accès Google Maps">
+      <div class="container">
+        <div class="map-card-wrapper map-card-split">
+          <div class="map-info-col">
+            <div>
+              <span class="section-label">Localisation & Accès</span>
+              <h2 class="map-title">Venir au Saint Esprit</h2>
+              <p class="map-subtitle">16 Rue du Refuge, 13002 Marseille · Au cœur des ruelles historiques du Panier</p>
+            </div>
+
+            <ul class="info-list" style="margin-block: var(--space-md); gap: 0.6rem;">
+              <li><strong>Métro :</strong> Vieux-Port (L1, L2) · 8 min à pied</li>
+              <li><strong>Bus :</strong> Ligne 49 — arrêt Place des Moulins</li>
+              <li><strong>Parking :</strong> Hôtel-de-Ville (payant)</li>
+            </ul>
+
+            <p class="info-card-note" style="margin-bottom: var(--space-md);">
+              Le Panier est un quartier piétonnier plein de charme. Flânez dans les ruelles avant de vous attabler !
+            </p>
+
+            <div>
+              <a href="https://maps.google.com/?q=Restaurant+Le+Saint+Esprit+16+Rue+du+Refuge+13002+Marseille" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="map-itinerary-btn">
+                Ouvrir dans Google Maps ↗
+              </a>
+            </div>
+          </div>
+
+          <div class="map-frame-wrap">
+            <iframe 
+              src="https://maps.google.com/maps?q=Restaurant+Le+Saint+Esprit,+16+Rue+du+Refuge,+13002+Marseille&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+              title="Localisation Google Maps du Saint Esprit Marseille"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <span class="footer-logo">Le Saint Esprit</span>
+          <p class="footer-tagline">Bistronomique sous les voûtes du Panier. Viandes & poissons frais, vins nature, convivialité marseillaise.</p>
+          <address class="footer-address">16 Rue du Refuge · 13002 Marseille<br><a href="tel:+33961293043" style="color:var(--color-stone)">09 61 29 30 43</a></address>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Navigation</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="menu.html">La Carte</a></li>
+            <li><a href="histoire.html">L'Histoire</a></li>
+            <li><a href="reservation.html">Réserver</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Horaires</h3>
+          <ul class="footer-hours">
+            <li><span><span>Vendredi</span><span>12h–14h30 · 19h–23h30</span></span></li>
+            <li><span><span>Sam · Dim · Lun</span><span>12h–14h30 · 19h–23h00</span></span></li>
+            <li><span><span>Mar · Mer · Jeu</span><span>Fermé</span></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Le Saint Esprit · 16 Rue du Refuge, Marseille</span>
+        <span>Mentions légales · Réservations : <a href="tel:+33961293043" style="color:inherit; text-decoration:underline;">09 61 29 30 43</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+    const burger = document.getElementById('nav-burger');
+    const drawer = document.getElementById('nav-drawer');
+    function closeDrawer() { drawer.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+    burger.addEventListener('click', () => {
+      const open = drawer.classList.toggle('open');
+      burger.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    document.addEventListener('keydown', e => { if (e.key==='Escape') closeDrawer(); });
+
+    // Date min = demain & vérification jours d'ouverture
+    const dateInput = document.getElementById('resa-date');
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.min = tomorrow.toISOString().split('T')[0];
+
+    const errDate = document.getElementById('err-date');
+    dateInput.addEventListener('change', () => {
+      if (!dateInput.value) return;
+      const day = new Date(dateInput.value + 'T00:00:00').getDay();
+      if (day === 2 || day === 3 || day === 4) { // Mardi, Mercredi, Jeudi
+        dateInput.classList.add('error');
+        dateInput.classList.remove('success');
+        errDate.textContent = 'Fermé du mardi au jeudi. Ouverture du vendredi au lundi !';
+        errDate.classList.add('show');
+      } else {
+        dateInput.classList.remove('error');
+        dateInput.classList.add('success');
+        errDate.classList.remove('show');
+        errDate.textContent = 'Choisissez une date valide.';
+      }
+    });
+
+    // Validation et soumission
+    const form = document.getElementById('resa-form');
+    function validateField(input, errId, condition) {
+      const err = document.getElementById(errId);
+      const valid = condition(input.value.trim());
+      input.classList.toggle('error', !valid);
+      input.classList.toggle('success', valid);
+      err.classList.toggle('show', !valid);
+      return valid;
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const checks = [
+        validateField(document.getElementById('resa-nom'),      'err-nom',      v => v.length >= 2),
+        validateField(document.getElementById('resa-prenom'),   'err-prenom',   v => v.length >= 1),
+        validateField(document.getElementById('resa-email'),    'err-email',    v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)),
+        validateField(document.getElementById('resa-tel'),      'err-tel',      v => v.length >= 8),
+        validateField(document.getElementById('resa-date'),     'err-date',     v => {
+          if (!v) return false;
+          const d = new Date(v + 'T00:00:00').getDay();
+          return d === 0 || d === 1 || d === 5 || d === 6;
+        }),
+        validateField(document.getElementById('resa-heure'),    'err-heure',    v => v !== ''),
+        validateField(document.getElementById('resa-couverts'), 'err-couverts', v => v !== ''),
+      ];
+
+      if (checks.every(Boolean)) {
+        document.getElementById('form-wrapper').style.display = 'none';
+        document.getElementById('resa-confirm').classList.add('show');
+      } else {
+        const firstError = form.querySelector('.error');
+        firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstError?.focus();
+      }
+    });
+
+    // Reveal
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

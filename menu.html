@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Carte & Les Menus — Le Saint Esprit · Marseille</title>
+  <meta name="description" content="La vraie carte du Saint Esprit au Panier : snacks, assiettes à partager, viandes maturées, poissons frais en direct des bateaux et menu freestyle. 16 Rue du Refuge, Marseille.">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=9">
+  <link rel="stylesheet" href="assets/css/main.css?v=9">
+  <style>
+    /* ── Page Menu ── */
+    .menu-hero {
+      background: var(--color-encre);
+      padding-block: calc(var(--space-3xl) + 2rem) var(--space-2xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('assets/images/terrasse-arbre.jpg') center 25% / cover;
+      opacity: 0.28;
+    }
+    .menu-hero-content { position: relative; z-index: 1; }
+    .menu-hero-label {
+      display: inline-block;
+      font-size: var(--text-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-stone);
+      margin-bottom: var(--space-sm);
+    }
+    .menu-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      color: #fff;
+      margin-bottom: var(--space-sm);
+    }
+    .menu-hero-sub {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-lg);
+      color: rgba(255,255,255,0.85);
+      max-width: 620px;
+      margin-inline: auto;
+    }
+    .menu-hero-note {
+      margin-top: var(--space-md);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      border: 1px solid rgba(184,150,90,0.5);
+      border-radius: 100px;
+      padding: 0.5rem 1.25rem;
+      background: rgba(0,0,0,0.3);
+    }
+
+    /* ── Section Menus Papier Réels (Photos des cartes) ── */
+    .real-menu-photos-section {
+      background: var(--color-surface);
+      padding-block: var(--space-3xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .section-intro-centered {
+      text-align: center;
+      max-width: 680px;
+      margin-inline: auto;
+      margin-bottom: var(--space-2xl);
+    }
+    .real-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+    .real-card-item {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+      display: flex;
+      flex-direction: column;
+    }
+    .real-card-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .real-card-header {
+      padding: var(--space-md) var(--space-lg);
+      background: var(--color-encre);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .real-card-header h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: var(--color-stone);
+    }
+    .real-card-header span {
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+    }
+    .real-card-media {
+      position: relative;
+      background: #f5f0eb;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+    .real-card-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s var(--ease-out);
+    }
+    .real-card-media:hover img {
+      transform: scale(1.02);
+    }
+    .real-card-footer {
+      padding: var(--space-sm) var(--space-lg);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      background: #faf8f5;
+      text-align: center;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* ── Galerie Photos Plats Réels ── */
+    .dishes-gallery-section {
+      padding-block: var(--space-3xl);
+      background: #fff;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .dishes-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+    .dish-photo-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--color-surface);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+    }
+    .dish-photo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .dish-photo-frame {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: var(--color-border);
+    }
+    .dish-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+    .dish-photo-card:hover .dish-photo-frame img {
+      transform: scale(1.06);
+    }
+    .dish-photo-info {
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .dish-photo-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+    }
+    .dish-photo-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.3;
+    }
+    .dish-photo-desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── La Carte Typographiée Authentique ── */
+    .menu-text-section {
+      padding-block: var(--space-3xl);
+    }
+    .menu-tabs-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: var(--space-2xl);
+      flex-wrap: wrap;
+    }
+    .menu-tab-btn {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      padding: 0.75rem 1.4rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-text);
+      transition: all var(--duration-fast);
+      box-shadow: var(--shadow-sm);
+    }
+    .menu-tab-btn:hover {
+      border-color: var(--color-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .menu-tab-btn.active {
+      background: var(--color-encre);
+      color: #fff;
+      border-color: var(--color-encre);
+      box-shadow: var(--shadow-md);
+    }
+    .menu-tab-btn .tab-badge {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 100px;
+      background: rgba(184, 150, 90, 0.2);
+      color: var(--color-gold);
+      font-weight: 600;
+    }
+    .menu-tab-btn.active .tab-badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--color-stone);
+    }
+    .carte-view-panel {
+      display: none;
+    }
+    .carte-view-panel.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    .carte-dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      max-width: 1200px;
+      margin-inline: auto;
+    }
+    .menu-paper-style {
+      background: #faf8f5;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 4vw, 3.5rem);
+      box-shadow: var(--shadow-md);
+      max-width: 820px;
+      margin-inline: auto;
+      position: relative;
+    }
+    .carte-dual-grid .menu-paper-style {
+      max-width: 100%;
+      margin-inline: 0;
+    }
+    .menu-paper-header-box {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+      padding-bottom: var(--space-lg);
+      border-bottom: 2px solid var(--color-border);
+    }
+    .menu-paper-title {
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .menu-paper-subtitle {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+    }
+    .btn-carte-photo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      background: rgba(184, 150, 90, 0.12);
+      border: 1px solid rgba(184, 150, 90, 0.35);
+      border-radius: 100px;
+      padding: 0.45rem 1.1rem;
+      cursor: pointer;
+      margin-top: 0.75rem;
+      transition: all 0.2s;
+    }
+    .btn-carte-photo:hover {
+      background: var(--color-gold);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .paper-section-block {
+      margin-bottom: var(--space-2xl);
+    }
+    .paper-section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      color: var(--color-bordeaux);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .paper-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+    .paper-item-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .paper-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1.5rem;
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px dashed rgba(200, 190, 180, 0.6);
+    }
+    .paper-item-text {
+      font-size: var(--text-md);
+      color: var(--color-text);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .paper-item-price {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--color-bordeaux);
+      white-space: nowrap;
+    }
+    .paper-freestyle-badge {
+      background: var(--color-encre);
+      color: #fff;
+      padding: var(--space-lg);
+      border-radius: var(--radius-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: var(--space-xl);
+    }
+    .paper-freestyle-badge h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      color: var(--color-stone);
+    }
+    .paper-freestyle-badge p {
+      font-size: var(--text-sm);
+      color: rgba(255,255,255,0.75);
+    }
+    .paper-freestyle-price {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      color: var(--color-gold);
+      font-weight: 500;
+    }
+
+    /* Producteurs sous la carte */
+    .paper-producteurs {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--color-border);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+    .paper-producteurs h4 {
+      font-family: var(--font-display);
+      font-size: var(--text-md);
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+      text-decoration: underline;
+    }
+    .paper-price-note {
+      text-align: right;
+      font-style: italic;
+      font-size: var(--text-xs);
+      color: var(--color-text-light);
+      margin-top: var(--space-md);
+    }
+
+    /* Modal plein écran pour zoomer sur la photo du menu */
+    .menu-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: var(--space-md);
+    }
+    .menu-modal.active { display: flex; }
+    .menu-modal img {
+      max-width: 95vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    }
+    .menu-modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      color: #fff;
+      font-size: 2.5rem;
+      line-height: 1;
+      cursor: pointer;
+      background: rgba(255,255,255,0.1);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .menu-modal-close:hover { background: rgba(255,255,255,0.25); }
+
+    @media (max-width: 960px) {
+      .carte-dual-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .real-cards-grid { grid-template-columns: 1fr; }
+      .dishes-gallery-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: var(--space-md);
+        padding-bottom: var(--space-md);
+        scrollbar-width: none;
+      }
+      .dishes-gallery-grid::-webkit-scrollbar { display: none; }
+      .dish-photo-card {
+        flex: 0 0 85vw;
+        scroll-snap-align: center;
+      }
+      .paper-freestyle-badge {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-md);
+      }
+      .paper-item-row {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .paper-item-price { align-self: flex-end; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <header class="site-header scrolled" id="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="site-logo"><a href="index.html" aria-label="Accueil">Le Saint Esprit</a></div>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="menu.html" aria-current="page">La Carte</a>
+        <a href="histoire.html">L'Histoire</a>
+        <a href="reservation.html" class="btn btn-outline nav-cta">Réserver</a>
+      </nav>
+      <button class="nav-burger" id="nav-burger" aria-expanded="false" aria-controls="nav-drawer" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Menu de navigation">
+    <a href="index.html" onclick="closeDrawer()">Accueil</a>
+    <a href="menu.html" onclick="closeDrawer()">La Carte</a>
+    <a href="histoire.html" onclick="closeDrawer()">L'Histoire</a>
+    <a href="reservation.html" class="btn btn-primary" onclick="closeDrawer()">Réserver une table</a>
+  </div>
+
+  <main>
+    <!-- ── Hero ── -->
+    <section class="menu-hero" aria-label="La carte du restaurant">
+      <div class="container menu-hero-content">
+        <span class="menu-hero-label">16 Rue du Refuge · Marseille</span>
+        <h1>La Carte du Saint Esprit</h1>
+        <p class="menu-hero-sub">Grillades, viandes maturées, poissons frais & assiettes de partage au gré des arrivages.</p>
+        <span class="menu-hero-note">✦ Viandes d'affinage, direct bateaux & maraîchers locaux</span>
+      </div>
+    </section>
+
+    <!-- ── 01 : LA CARTE ÉCRITE MOT POUR MOT (Retranscription fidèle des menus originaux) ── -->
+    <section class="menu-text-section" id="cartes-officielles" aria-label="La Carte du Saint Esprit">
+      <div class="container">
+
+        <div class="section-intro-centered" style="margin-bottom:var(--space-2xl);">
+          <span class="section-label">La vraie carte</span>
+          <h2>La Carte du Saint Esprit</h2>
+          <p style="color:var(--color-text-muted); font-size:var(--text-md); margin-top:0.5rem; max-width:640px; margin-inline:auto;">
+            Cuisine d'instinct au feu de bois, découpes et viandes maturées, poissons de roche en direct des bateaux phocéens. Retrouvez ici nos deux cartes de service retranscrites mot pour mot.
+          </p>
+        </div>
+
+        <!-- Onglets de sélection -->
+        <div class="menu-tabs-wrap" role="tablist" aria-label="Choix de la carte">
+          <button class="menu-tab-btn active" id="tab-btn-carteall" role="tab" aria-selected="true" aria-controls="panel-carte-all" onclick="switchCarte('panel-carte-all', this)">
+            <span class="tab-badge">Complète</span>
+            <span>Toute la Carte (Les 2 Menus)</span>
+          </button>
+          <button class="menu-tab-btn" id="tab-btn-carte1" role="tab" aria-selected="false" aria-controls="panel-carte-1" onclick="switchCarte('panel-carte-1', this)">
+            <span class="tab-badge">Carte 1</span>
+            <span>Snacks, Assiettes & Freestyle (50€)</span>
+          </button>
+          <button class="menu-tab-btn" id="tab-btn-carte2" role="tab" aria-selected="false" aria-controls="panel-carte-2" onclick="switchCarte('panel-carte-2', this)">
+            <span class="tab-badge">Carte 2</span>
+            <span>Assiettes à Partager & Desserts</span>
+          </button>
+        </div>
+
+        <!-- ── PANNEAU 3 (ACTIF PAR DÉFAUT) : LES DEUX CARTES CÔTE À CÔTE ── -->
+        <div class="carte-view-panel active" id="panel-carte-all" role="tabpanel" aria-labelledby="tab-btn-carteall">
+          <div class="carte-dual-grid">
+
+            <!-- CARTE 1 (GOUVERNE / SOIR) -->
+            <article class="menu-paper-style">
+              <div class="menu-paper-header-box">
+                <h3 class="menu-paper-title">LE SAINT ESPRIT</h3>
+                <p class="menu-paper-subtitle">Snacks, Assiettes & Menu Freestyle</p>
+                <button type="button" class="btn-carte-photo" onclick="openMenuModal('assets/images/carte-snacks-assiettes.webp')">
+                  📷 Voir photo originale du menu (MENU 2)
+                </button>
+              </div>
+
+              <!-- Snacks -->
+              <div class="paper-section-block">
+                <h4 class="paper-section-title">Snacks</h4>
+                <div class="paper-item-list">
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Charcuterie de canette, beurre au poivre</span>
+                    <span class="paper-item-price">13</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Tartare de seiche, jus oignons, noisettes, piment, poudre de girolles</span>
+                    <span class="paper-item-price">15</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Moules en escabèche, chili oil, choux rave, bouillon moules, tagète</span>
+                    <span class="paper-item-price">12</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Tartare d'agneau, pistache, crème crue, poutargue</span>
+                    <span class="paper-item-price">16</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Sashimi de thon rouge (70g), shoyou, huile d'ail, merkèn</span>
+                    <span class="paper-item-price">17</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Assiettes -->
+              <div class="paper-section-block">
+                <h4 class="paper-section-title">Assiettes</h4>
+                <div class="paper-item-list">
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Tortellini champignons et mousse foie de volaille, eau de tomates, basilic citron vert, beurre noisette</span>
+                    <span class="paper-item-price">16</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Salade de tomate verte, shiso, pastrami coeur d'agneau, cumin</span>
+                    <span class="paper-item-price">17</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Poisson selon arrivage, chips d'ail pimenton, pilpil, brocoli, poutargue</span>
+                    <span class="paper-item-price">27</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Ventrèche de thon sauce au poivre</span>
+                    <span class="paper-item-price">27</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Echine de cochon, crevettes de méditerranée, mûres, sauge, polenta</span>
+                    <span class="paper-item-price">29</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Desserts -->
+              <div class="paper-section-block">
+                <h4 class="paper-section-title">Desserts</h4>
+                <div class="paper-item-list">
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Mousse chocolat, glace fleur de fenouil, figue fraîche, fleur de sel</span>
+                    <span class="paper-item-price">9</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Granité oseille, glace chèvre, praliné de graines de courge, raisin, chouchou</span>
+                    <span class="paper-item-price">9</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Menu freestyle -->
+              <div class="paper-freestyle-badge">
+                <div>
+                  <h4 style="font-family:var(--font-display); font-size:var(--text-xl); color:var(--color-stone);">Menu freestyle</h4>
+                  <p style="font-size:var(--text-xs); color:rgba(255,255,255,0.8); margin-top:0.2rem;">Carte blanche du chef selon l'humeur, la pêche et le marché.</p>
+                </div>
+                <div class="paper-freestyle-price" style="font-size:2.2rem;">50</div>
+              </div>
+
+              <!-- Producteurs -->
+              <div class="paper-producteurs">
+                <h5 style="font-family:var(--font-display); font-size:var(--text-sm); color:var(--color-text); margin-bottom:0.4rem; text-decoration:underline;">Producteurs</h5>
+                <p style="font-size:0.8rem; line-height:1.6;"><strong>Maraîchers :</strong> Big bloom, Rocket, Ferme Vava, Cultisaveur, Marché du Cours Julien<br>
+                <strong>Poisson :</strong> Côté fish, Direct bateau (Port de la Madrague et Vieux Port)<br>
+                <strong>Viande :</strong> Canette AOP des Dombes, Boeuf de race Normande<br>
+                <strong>Produits laitier :</strong> AOP de Bresse, Cabro d'or "chèvres du Rove"</p>
+              </div>
+            </article>
+
+            <!-- CARTE 2 (ASSIETTES À PARTAGER) -->
+            <article class="menu-paper-style">
+              <div class="menu-paper-header-box">
+                <h3 class="menu-paper-title">LE SAINT ESPRIT</h3>
+                <p class="menu-paper-subtitle">Assiettes à Partager & Desserts</p>
+                <button type="button" class="btn-carte-photo" onclick="openMenuModal('assets/images/carte-assiettes-partager.webp')">
+                  📷 Voir photo originale du menu (menu 1)
+                </button>
+              </div>
+
+              <!-- Assiettes à partager -->
+              <div class="paper-section-block">
+                <h4 class="paper-section-title">Assiettes à partager</h4>
+                <div class="paper-item-list">
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Seiche, oignon rouge, poudre de girolles, noisettes</span>
+                    <span class="paper-item-price">14</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Omelette, haricots vert, amandes, poutargue</span>
+                    <span class="paper-item-price">16</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Tortellini au poulpe, lard noir de bigorre, diplotaxis, bouillon de canette</span>
+                    <span class="paper-item-price">18</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Rouget, moules, yaourt de brebis, brocoli sauvage, combawa</span>
+                    <span class="paper-item-price">21</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Muge, pilpil, chou kale, condiment figue, poudre d'algues, limequat</span>
+                    <span class="paper-item-price">27</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Echine de cochon du Mont Lagast, girolles, sauge, polenta arto gorria</span>
+                    <span class="paper-item-price">29</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Desserts -->
+              <div class="paper-section-block">
+                <h4 class="paper-section-title">Desserts</h4>
+                <div class="paper-item-list">
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Sorbet de chèvre, eau de butternut fermenté, huile d'olive, chouchou, oxalis</span>
+                    <span class="paper-item-price">9</span>
+                  </div>
+                  <div class="paper-item-row">
+                    <span class="paper-item-text">Mousse chocolat, glace fleur de fenouil, cardamome noir</span>
+                    <span class="paper-item-price">9</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Producteurs -->
+              <div class="paper-producteurs" style="margin-top:calc(var(--space-2xl) + 2rem);">
+                <h5 style="font-family:var(--font-display); font-size:var(--text-sm); color:var(--color-text); margin-bottom:0.4rem; text-decoration:underline;">Producteurs</h5>
+                <p style="font-size:0.8rem; line-height:1.6;"><strong>Maraîchers :</strong> Big bloom, Rocket, Ferme Vava, Cultisaveur, Marché du Cours Julien<br>
+                <strong>Poisson :</strong> Côté fish, Direct bateau (Port de la Madrague et Vieux Port)<br>
+                <strong>Viande :</strong> Canette AOP des Dombes, Porc Noir de Bigorre, Cochon du Mont Lagast<br>
+                <strong>Produits laitier :</strong> AOP de Bresse, Cabro d'or "chèvres du Rove"</p>
+                <p class="paper-price-note" style="margin-top:0.75rem;">Prix net en euros, service inclus.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── PANNEAU 1 SEUL : CARTE 1 (SNACKS, ASSIETTES & FREESTYLE) ── -->
+        <div class="carte-view-panel" id="panel-carte-1" role="tabpanel" aria-labelledby="tab-btn-carte1">
+          <article class="menu-paper-style">
+            <div class="menu-paper-header-box">
+              <h3 class="menu-paper-title">LE SAINT ESPRIT</h3>
+              <p class="menu-paper-subtitle">Carte Snacks, Assiettes, Desserts & Menu Freestyle</p>
+              <button type="button" class="btn-carte-photo" onclick="openMenuModal('assets/images/carte-snacks-assiettes.webp')">
+                📷 Voir photo originale du menu (MENU 2)
+              </button>
+            </div>
+
+            <!-- Snacks -->
+            <div class="paper-section-block">
+              <h4 class="paper-section-title">Snacks</h4>
+              <div class="paper-item-list">
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Charcuterie de canette, beurre au poivre</span>
+                  <span class="paper-item-price">13</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Tartare de seiche, jus oignons, noisettes, piment, poudre de girolles</span>
+                  <span class="paper-item-price">15</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Moules en escabèche, chili oil, choux rave, bouillon moules, tagète</span>
+                  <span class="paper-item-price">12</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Tartare d'agneau, pistache, crème crue, poutargue</span>
+                  <span class="paper-item-price">16</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Sashimi de thon rouge (70g), shoyou, huile d'ail, merkèn</span>
+                  <span class="paper-item-price">17</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Assiettes -->
+            <div class="paper-section-block">
+              <h4 class="paper-section-title">Assiettes</h4>
+              <div class="paper-item-list">
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Tortellini champignons et mousse foie de volaille, eau de tomates, basilic citron vert, beurre noisette</span>
+                  <span class="paper-item-price">16</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Salade de tomate verte, shiso, pastrami coeur d'agneau, cumin</span>
+                  <span class="paper-item-price">17</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Poisson selon arrivage, chips d'ail pimenton, pilpil, brocoli, poutargue</span>
+                  <span class="paper-item-price">27</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Ventrèche de thon sauce au poivre</span>
+                  <span class="paper-item-price">27</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Echine de cochon, crevettes de méditerranée, mûres, sauge, polenta</span>
+                  <span class="paper-item-price">29</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="paper-section-block">
+              <h4 class="paper-section-title">Desserts</h4>
+              <div class="paper-item-list">
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Mousse chocolat, glace fleur de fenouil, figue fraîche, fleur de sel</span>
+                  <span class="paper-item-price">9</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Granité oseille, glace chèvre, praliné de graines de courge, raisin, chouchou</span>
+                  <span class="paper-item-price">9</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu Freestyle -->
+            <div class="paper-freestyle-badge">
+              <div>
+                <h4 style="font-family:var(--font-display); font-size:var(--text-2xl); color:var(--color-stone);">Menu freestyle</h4>
+                <p style="font-size:var(--text-sm); color:rgba(255,255,255,0.8); margin-top:0.25rem;">Carte blanche du chef selon l'humeur, la pêche et le marché.</p>
+              </div>
+              <div class="paper-freestyle-price">50</div>
+            </div>
+
+            <!-- Producteurs -->
+            <div class="paper-producteurs">
+              <h5 style="font-family:var(--font-display); font-size:var(--text-md); color:var(--color-text); margin-bottom:0.5rem; text-decoration:underline;">Producteurs</h5>
+              <p><strong>Maraîchers :</strong> Big bloom, Rocket, Ferme Vava, Cultisaveur, Marché du Cours Julien</p>
+              <p><strong>Poisson :</strong> Côté fish, Direct bateau (Port de la Madrague et Vieux Port)</p>
+              <p><strong>Viande :</strong> Canette AOP des Dombes, Boeuf de race Normande</p>
+              <p><strong>Produits laitier :</strong> AOP de Bresse, Cabro d'or "chèvres du Rove"</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- ── PANNEAU 2 SEUL : CARTE 2 (ASSIETTES À PARTAGER) ── -->
+        <div class="carte-view-panel" id="panel-carte-2" role="tabpanel" aria-labelledby="tab-btn-carte2">
+          <article class="menu-paper-style">
+            <div class="menu-paper-header-box">
+              <h3 class="menu-paper-title">LE SAINT ESPRIT</h3>
+              <p class="menu-paper-subtitle">Carte Assiettes à Partager & Desserts</p>
+              <button type="button" class="btn-carte-photo" onclick="openMenuModal('assets/images/carte-assiettes-partager.webp')">
+                📷 Voir photo originale du menu (menu 1)
+              </button>
+            </div>
+
+            <!-- Assiettes à partager -->
+            <div class="paper-section-block">
+              <h4 class="paper-section-title">Assiettes à partager</h4>
+              <div class="paper-item-list">
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Seiche, oignon rouge, poudre de girolles, noisettes</span>
+                  <span class="paper-item-price">14</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Omelette, haricots vert, amandes, poutargue</span>
+                  <span class="paper-item-price">16</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Tortellini au poulpe, lard noir de bigorre, diplotaxis, bouillon de canette</span>
+                  <span class="paper-item-price">18</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Rouget, moules, yaourt de brebis, brocoli sauvage, combawa</span>
+                  <span class="paper-item-price">21</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Muge, pilpil, chou kale, condiment figue, poudre d'algues, limequat</span>
+                  <span class="paper-item-price">27</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Echine de cochon du Mont Lagast, girolles, sauge, polenta arto gorria</span>
+                  <span class="paper-item-price">29</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="paper-section-block">
+              <h4 class="paper-section-title">Desserts</h4>
+              <div class="paper-item-list">
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Sorbet de chèvre, eau de butternut fermenté, huile d'olive, chouchou, oxalis</span>
+                  <span class="paper-item-price">9</span>
+                </div>
+                <div class="paper-item-row">
+                  <span class="paper-item-text">Mousse chocolat, glace fleur de fenouil, cardamome noir</span>
+                  <span class="paper-item-price">9</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Producteurs -->
+            <div class="paper-producteurs">
+              <h5 style="font-family:var(--font-display); font-size:var(--text-md); color:var(--color-text); margin-bottom:0.5rem; text-decoration:underline;">Producteurs</h5>
+              <p><strong>Maraîchers :</strong> Big bloom, Rocket, Ferme Vava, Cultisaveur, Marché du Cours Julien</p>
+              <p><strong>Poisson :</strong> Côté fish, Direct bateau (Port de la Madrague et Vieux Port)</p>
+              <p><strong>Viande :</strong> Canette AOP des Dombes, Porc Noir de Bigorre, Cochon du Mont Lagast</p>
+              <p><strong>Produits laitier :</strong> AOP de Bresse, Cabro d'or "chèvres du Rove"</p>
+              <p class="paper-price-note">Prix net en euros, service inclus.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Bouton réservation sous la carte -->
+        <div style="text-align:center; margin-top:var(--space-2xl);">
+          <a href="reservation.html" class="btn btn-primary" style="font-size:var(--text-md); padding:1.1rem 2.5rem;">Réserver une table pour ce menu</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 02 : DANS L'ASSIETTE — NOS PLATS EN IMAGES ── -->
+    <section class="dishes-gallery-section" aria-label="Photos des plats du restaurant">
+      <div class="container">
+        <div class="section-intro-centered">
+          <span class="section-label">Dans l'Assiette</span>
+          <h2>Nos Plats en Images</h2>
+          <p style="color:var(--color-text-muted); font-size:var(--text-md); margin-top:0.5rem;">
+            Photographies de créations réalisées au restaurant : cuissons vives, produits bruts et assaisonnements francs.
+          </p>
+        </div>
+
+        <div class="dishes-gallery-grid">
+          <!-- 1. Viande grenaille -->
+          <article class="dish-photo-card">
+            <div class="dish-photo-frame">
+              <img src="assets/images/plat-viande-grenaille.webp" alt="Pièce de viande rôtie, jus de carcasse réduit, pommes grenailles et graines de moutarde" loading="lazy">
+            </div>
+            <div class="dish-photo-info">
+              <span class="dish-photo-tag">Cave d'Affinage</span>
+              <h3 class="dish-photo-title">Pièce maturée, jus corsé & grenaille</h3>
+              <p class="dish-photo-desc">Viande tranchée saignante, jus réduit avec patience, pommes grenailles rissolées et moutarde en grains.</p>
+            </div>
+          </article>
+
+          <!-- 2. Gambas grillées -->
+          <article class="dish-photo-card">
+            <div class="dish-photo-frame">
+              <img src="assets/images/plat-gambas-grillees.webp" alt="Gambas grillées au feu de bois avec rouille pimentée" loading="lazy">
+            </div>
+            <div class="dish-photo-info">
+              <span class="dish-photo-tag">Flamme & Grillades</span>
+              <h3 class="dish-photo-title">Gambas grillées & rouille relevée</h3>
+              <p class="dish-photo-desc">Grosses crevettes saisies à vif sur la braise, servies avec notre aïoli pimenté maison.</p>
+            </div>
+          </article>
+
+          <!-- 3. Risotto moules -->
+          <article class="dish-photo-card">
+            <div class="dish-photo-frame">
+              <img src="assets/images/plat-risotto-moules.webp" alt="Risotto crémeux aux moules fraîches et poutargue râpée" loading="lazy">
+            </div>
+            <div class="dish-photo-info">
+              <span class="dish-photo-tag">Mer & Riz</span>
+              <h3 class="dish-photo-title">Risotto aux moules & poutargue</h3>
+              <p class="dish-photo-desc">Riz crémeux lié au jus marin, moules de roche, ciboulette ciselée et voile croustillant de poutargue.</p>
+            </div>
+          </article>
+
+          <!-- 4. Poireaux brûlés -->
+          <article class="dish-photo-card">
+            <div class="dish-photo-frame">
+              <img src="assets/images/plat-poireaux-brulees.webp" alt="Poireaux brûlés au grill, huile d'herbes vertes et crumble" loading="lazy">
+            </div>
+            <div class="dish-photo-info">
+              <span class="dish-photo-tag">Maraîchage Local</span>
+              <h3 class="dish-photo-title">Poireaux brûlés & huile d'herbes</h3>
+              <p class="dish-photo-desc">Poireaux confits et marqués au feu, émulsion de crème, huile verte pressée et crumble salé.</p>
+            </div>
+          </article>
+
+          <!-- 5. Oeufs mayo mimosa -->
+          <article class="dish-photo-card">
+            <div class="dish-photo-frame">
+              <img src="assets/images/plat-oeufs-mayo.jpg" alt="Œufs mimosa du Panier aux herbes fraîches et cerfeuil" loading="lazy">
+            </div>
+            <div class="dish-photo-info">
+              <span class="dish-photo-tag">Snack Bistrot</span>
+              <h3 class="dish-photo-title">Œufs mimosa du Panier</h3>
+              <p class="dish-photo-desc">Trois demi-œufs dressés minute à la poche, herbes fraîches du marché et filet d'huile d'olive nouvelle.</p>
+            </div>
+          </article>
+
+          <!-- 6. Croustillant & trévise -->
+          <article class="dish-photo-card">
+            <div class="dish-photo-frame">
+              <img src="assets/images/plat-croustillant.webp" alt="Assiette croustillante dorée, trévise braisée et crème onctueuse" loading="lazy">
+            </div>
+            <div class="dish-photo-info">
+              <span class="dish-photo-tag">Assiette à Partager</span>
+              <h3 class="dish-photo-title">Croustillant doré & trévise</h3>
+              <p class="dish-photo-desc">Croustillant à la panure fine, salade trévise rouge amère braisée, herbes fraîches et crème émulsionnée.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Zoom Photo Menu -->
+  <div class="menu-modal" id="menu-modal" onclick="closeMenuModal()">
+    <button class="menu-modal-close" aria-label="Fermer" onclick="closeMenuModal()">&times;</button>
+    <img id="menu-modal-img" src="" alt="Menu agrandi">
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <span class="footer-logo">Le Saint Esprit</span>
+          <p class="footer-tagline">Bistronomique sous les voûtes du Panier. Viandes & poissons frais, vins nature, convivialité marseillaise.</p>
+          <address class="footer-address">16 Rue du Refuge · 13002 Marseille<br><a href="tel:+33961293043" style="color:var(--color-stone)">09 61 29 30 43</a></address>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Navigation</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="menu.html">La Carte</a></li>
+            <li><a href="histoire.html">L'Histoire</a></li>
+            <li><a href="reservation.html">Réserver</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Horaires</h3>
+          <ul class="footer-hours">
+            <li><span><span>Vendredi</span><span>12h–14h30 · 19h–23h30</span></span></li>
+            <li><span><span>Sam · Dim · Lun</span><span>12h–14h30 · 19h–23h00</span></span></li>
+            <li><span><span>Mar · Mer · Jeu</span><span>Fermé</span></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Le Saint Esprit · 16 Rue du Refuge, Marseille</span>
+        <span>Mentions légales · Réservations : <a href="tel:+33961293043" style="color:inherit; text-decoration:underline;">09 61 29 30 43</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const burger = document.getElementById('nav-burger');
+    const drawer = document.getElementById('nav-drawer');
+    function openDrawer() {
+      drawer.classList.add('open');
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    burger.addEventListener('click', () => {
+      burger.getAttribute('aria-expanded') === 'false' ? openDrawer() : closeDrawer();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+    // Modal Zoom Photo Menu
+    const modal = document.getElementById('menu-modal');
+    const modalImg = document.getElementById('menu-modal-img');
+    function openMenuModal(src) {
+      modalImg.src = src;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenuModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeMenuModal();
+    });
+
+    // Bascule des onglets de carte (Carte 1 / Carte 2 / Les 2)
+    function switchCarte(panelId, btn) {
+      document.querySelectorAll('.carte-view-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.menu-tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      const targetPanel = document.getElementById(panelId);
+      if (targetPanel) targetPanel.classList.add('active');
+      if (btn) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+      }
+    }
+  </script>
+</body>
+</html>

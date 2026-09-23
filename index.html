@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Saint Esprit — Bistronomique · Le Panier, Marseille</title>
+  <meta name="description" content="Le Saint Esprit, bistro bistronomique sous les voûtes d'une ancienne boulangerie au cœur du Panier, Marseille. Cuisine instinctive, produits de saison, vins nature.">
+  <meta property="og:title" content="Le Saint Esprit — Bistronomique, Marseille">
+  <meta property="og:description" content="Sous les voûtes de pierre du Panier, une cuisine instinctive et des vins nature.">
+  <meta property="og:image" content="assets/images/terrasse-arbre.jpg">
+  <meta property="og:type" content="restaurant">
+  <link rel="canonical" href="/">
+
+  <!-- Schéma JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Le Saint Esprit",
+    "description": "Restaurant bistronomique sous les voûtes d'une ancienne boulangerie au cœur du Panier, Marseille.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "16 Rue du Refuge",
+      "addressLocality": "Marseille",
+      "postalCode": "13002",
+      "addressCountry": "FR"
+    },
+    "servesCuisine": "Bistronomique, Cuisine de saison, Grillades",
+    "url": "https://lesaintesprit.fr",
+    "telephone": "+33961293043",
+    "priceRange": "€€–€€€",
+    "openingHours": ["Fr 12:00-14:30", "Fr 19:00-23:30", "Sa-Mo 12:00-14:30", "Sa-Mo 19:00-23:00"]
+  }
+  </script>
+
+  <link rel="stylesheet" href="assets/css/tokens.css?v=9">
+  <link rel="stylesheet" href="assets/css/main.css?v=9">
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <header class="site-header header-transparent" id="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="site-logo">
+        <a href="index.html" aria-label="Le Saint Esprit — Accueil">Le Saint Esprit</a>
+      </div>
+
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html" aria-current="page">Accueil</a>
+        <a href="menu.html">La Carte</a>
+        <a href="histoire.html">L'Histoire</a>
+        <a href="reservation.html" class="btn btn-outline nav-cta">Réserver</a>
+      </nav>
+
+      <button class="nav-burger" id="nav-burger" aria-expanded="false" aria-controls="nav-drawer" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Drawer mobile -->
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Menu de navigation">
+    <a href="index.html" onclick="closeDrawer()">Accueil</a>
+    <a href="menu.html" onclick="closeDrawer()">La Carte</a>
+    <a href="histoire.html" onclick="closeDrawer()">L'Histoire</a>
+    <a href="reservation.html" class="btn btn-primary" onclick="closeDrawer()">Réserver une table</a>
+  </div>
+
+  <main>
+    <!-- ── Hero ───────────────────────────────────────────────── -->
+    <section class="hero" id="hero" aria-label="Présentation du restaurant">
+      <div class="hero-media">
+        <img
+          src="assets/images/salle-voutee.webp"
+          alt="La salle voûtée aux pierres séculaires et lustres dorés du Saint Esprit à Marseille"
+          class="hero-img"
+          loading="eager"
+          fetchpriority="high"
+          style="object-position: center 30%;"
+        >
+        <div class="hero-overlay"></div>
+        <div class="hero-grain"></div>
+      </div>
+
+      <div class="hero-content container">
+        <h1 class="hero-title">Le Saint Esprit</h1>
+        <p class="hero-sub">Sous les voûtes d'un vieux fournil, une cuisine instinctive,<br>des saisons à l'assiette, des vins qui ont une âme.</p>
+        <div class="hero-actions">
+          <a href="reservation.html" class="btn btn-primary" id="hero-cta-resa">Réserver une table</a>
+          <a href="menu.html" class="btn btn-ghost" id="hero-cta-menu">Voir la carte</a>
+        </div>
+      </div>
+
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span class="scroll-line"></span>
+        <span class="scroll-label">Descendre</span>
+      </div>
+    </section>
+
+    <!-- ── Accroche Identité ───────────────────────────────────── -->
+    <section class="identity-strip">
+      <div class="container">
+        <div class="identity-grid">
+          <div class="identity-item reveal stagger-1">
+            <span class="identity-icon" aria-hidden="true">☙</span>
+            <h3 class="identity-title">L'Instinct avant tout</h3>
+            <p>Pas de carte figée. Les assiettes racontent la saison, la pêche locale et l'inspiration du jour.</p>
+          </div>
+          <div class="identity-item reveal stagger-2">
+            <span class="identity-icon" aria-hidden="true">☙</span>
+            <h3 class="identity-title">Les viandes & poissons frais</h3>
+            <p>Cave de maturation maison, poissons de roche en direct des bateaux et cuissons au feu.</p>
+          </div>
+          <div class="identity-item reveal stagger-3">
+            <span class="identity-icon" aria-hidden="true">☙</span>
+            <h3 class="identity-title">Le Panier comme écrin</h3>
+            <p>Sous les voûtes du vieux fournil ou sur la terrasse pavée ombragée par l'arbre centenaire.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Ambiance — double image asymétrique ─────────────────── -->
+    <section class="ambiance-section">
+      <div class="container">
+        <div class="ambiance-grid">
+          <div class="ambiance-text reveal-left">
+            <span class="section-label">L'adresse</span>
+            <h2 class="ambiance-heading">Un lieu qui a de la mémoire</h2>
+            <p class="ambiance-body">
+              Derrière la devanture du 16 Rue du Refuge se cache un ancien fournil dont les voûtes de pierre ont traversé les siècles. Une histoire de pain, de quartier, d'une légende marseillaise qui résonne encore sous les lustres dorés.
+            </p>
+            <p class="ambiance-body" style="margin-top:1rem;">
+              Nous avons fait de cet espace un repaire vivant : animé le soir sous la lumière chaude des bougies, doux à midi à l'ombre de l'arbre, toujours sincère.
+            </p>
+            <a href="histoire.html" class="btn btn-outline" style="margin-top:var(--space-lg);" id="ambiance-histoire-link">Découvrir l'histoire</a>
+          </div>
+          <div class="ambiance-images reveal-right">
+            <div class="ambiance-img-main">
+              <img src="assets/images/facade-terrasse-nuit.webp" alt="La devanture et la terrasse du Saint Esprit le soir" loading="lazy">
+            </div>
+            <div class="ambiance-img-secondary">
+              <img src="assets/images/cave-maturation-facade.webp" alt="La cave de maturation maison du restaurant" loading="lazy">
+              <div class="ambiance-img-caption">Cave de maturation & produits bruts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Plat mis en avant ────────────────────────────────────── -->
+    <section class="plat-section">
+      <div class="plat-inner container">
+        <div class="plat-img-wrap reveal-left">
+          <img src="assets/images/plat-viande-grenaille.webp" alt="Pièce rôtie, jus corsé réduit, pommes grenaille et graines de moutarde" loading="lazy">
+          <div class="plat-label" aria-hidden="true">Assiette signature</div>
+        </div>
+        <div class="plat-text reveal-right">
+          <span class="section-label">La cuisine</span>
+          <h2>Produits bruts,<br>gestes instinctifs</h2>
+          <p>
+            La cuisine du Saint Esprit est directe, sans détour. Viandes sélectionnées affinées dans notre cave de maturation, poissons de roche en direct de la Madrague et du Vieux Port, légumes cueillis le matin par nos maraîchers partenaires.
+          </p>
+          <p style="margin-top:1rem;">
+            Des assiettes à partager pensées pour la table, le vin et la vie. Ce qui ne change jamais : l'exigence du produit et la générosité du geste.
+          </p>
+          <div class="plat-ctas">
+            <a href="menu.html" class="btn btn-primary" id="plat-menu-link">Découvrir la carte</a>
+            <a href="reservation.html" class="btn btn-ghost" style="color:var(--color-text); border:1px solid var(--color-border);">Réserver</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Extrait de La Carte Écrite ──────────────────────────── -->
+    <section class="menu-preview-section" style="padding-block:var(--space-3xl); background:var(--color-surface); border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border);">
+      <div class="container">
+        <div style="text-align:center; max-width:680px; margin-inline:auto; margin-bottom:var(--space-2xl);">
+          <span class="section-label">La carte écrite</span>
+          <h2 style="font-family:var(--font-display); font-size:clamp(2rem, 4vw, 3rem);">Plats & Assiettes à Partager</h2>
+          <p style="color:var(--color-text-muted); font-size:var(--text-md); margin-top:0.5rem;">
+            Extraits de nos cartes authentiques de service — arrivages de poissons marseillais, viandes de notre cave de maturation et maraîchage local.
+          </p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:var(--space-xl); max-width:1050px; margin-inline:auto;">
+          <!-- Colonne 1 : Snacks & Partage -->
+          <div style="background:#fff; border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-xl); box-shadow:var(--shadow-sm);">
+            <h3 style="font-family:var(--font-display); font-size:var(--text-xl); color:var(--color-bordeaux); margin-bottom:var(--space-md); padding-bottom:var(--space-xs); border-bottom:1px solid var(--color-border);">Snacks & Partage</h3>
+            <ul style="display:flex; flex-direction:column; gap:0.9rem;">
+              <li style="display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px dashed rgba(200,190,180,0.6); padding-bottom:0.5rem;">
+                <span style="font-size:var(--text-sm); color:var(--color-text);">Charcuterie de canette, beurre au poivre</span>
+                <strong style="font-family:var(--font-display); font-size:var(--text-lg); color:var(--color-bordeaux); white-space:nowrap;">13 €</strong>
+              </li>
+              <li style="display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px dashed rgba(200,190,180,0.6); padding-bottom:0.5rem;">
+                <span style="font-size:var(--text-sm); color:var(--color-text);">Tartare de seiche, noisettes, piment, poudre de girolles</span>
+                <strong style="font-family:var(--font-display); font-size:var(--text-lg); color:var(--color-bordeaux); white-space:nowrap;">15 €</strong>
+              </li>
+              <li style="display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px dashed rgba(200,190,180,0.6); padding-bottom:0.5rem;">
+                <span style="font-size:var(--text-sm); color:var(--color-text);">Moules en escabèche, chili oil, choux rave, bouillon moules</span>
+                <strong style="font-family:var(--font-display); font-size:var(--text-lg); color:var(--color-bordeaux); white-space:nowrap;">12 €</strong>
+              </li>
+              <li style="display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px dashed rgba(200,190,180,0.6); padding-bottom:0.5rem;">
+                <span style="font-size:var(--text-sm); color:var(--color-text);">Omelette, haricots vert, amandes, poutargue</span>
+                <strong style="font-family:var(--font-display); font-size:var(--text-lg); color:var(--color-bordeaux); white-space:nowrap;">16 €</strong>
+              </li>
+              <li style="display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px dashed rgba(200,190,180,0.6); padding-bottom:0.5rem;">
+                <span style="font-size:var(--text-sm); color:var(--color-text);">Tartare d'agneau, pistache, crème crue, poutargue</span>
+                <strong style="font-family:var(--font-display); font-size:var(--text-lg); color:var(--color-bordeaux); white-space:nowrap;">16 €</strong>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Colonne 2 : Assiettes & Arrivages -->
+          <div style="background:#fff; border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-xl); box-shadow:var(--shadow-sm);">
+            <h3 style="font-family:var(--font-display); font-size:var(--text-xl); color:var(--color-bordeaux); margin-bottom:var(--space-md); padding-bottom:var(--space-xs); border-bottom:1px solid var(--color-border);">Assiettes & Arrivages</h3>
+            <ul style="display:flex; flex-direction:column; gap:0.9rem;">
+              <li style="display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px dashed rgba(200,190,180,0.6); padding-bottom:0.5rem;">
+                <span style="font-size:var(--text-sm); color:var(--color-text);">Tortellini au poulpe, lard noir de bigorre, bouillon de canette</span>
+                <strong style="font-family:var(--font-display); font-size:var(--text-lg); color:var(--color-bordeaux); white-space:nowrap;">18 €</strong>
+              </li>
+              <li style="display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px dashed rgba(200,190,180,0.6); padding-bottom:0.5rem;">
+                <span style="font-size:var(--text-sm); color:var(--color-text);">Rouget, moules, yaourt de brebis, brocoli sauvage, combawa</span>
+                <strong style="font-family:var(--font-display); font-size:var(--text-lg); color:var(--color-bordeaux); white-space:nowrap;">21 €</strong>
+              </li>
+              <li style="display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px dashed rgba(200,190,180,0.6); padding-bottom:0.5rem;">
+                <span style="font-size:var(--text-sm); color:var(--color-text);">Poisson direct bateau, chips d'ail pimenton, pilpil, brocoli</span>
+                <strong style="font-family:var(--font-display); font-size:var(--text-lg); color:var(--color-bordeaux); white-space:nowrap;">27 €</strong>
+              </li>
+              <li style="display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px dashed rgba(200,190,180,0.6); padding-bottom:0.5rem;">
+                <span style="font-size:var(--text-sm); color:var(--color-text);">Ventrèche de thon sauce au poivre</span>
+                <strong style="font-family:var(--font-display); font-size:var(--text-lg); color:var(--color-bordeaux); white-space:nowrap;">27 €</strong>
+              </li>
+              <li style="display:flex; justify-content:space-between; align-items:baseline; gap:1rem; border-bottom:1px dashed rgba(200,190,180,0.6); padding-bottom:0.5rem;">
+                <span style="font-size:var(--text-sm); color:var(--color-text);">Echine de cochon Mont Lagast, girolles, sauge, polenta</span>
+                <strong style="font-family:var(--font-display); font-size:var(--text-lg); color:var(--color-bordeaux); white-space:nowrap;">29 €</strong>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:var(--space-2xl); display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+          <a href="menu.html" class="btn btn-primary" style="padding:1rem 2rem;">Consulter toute la carte & les menus</a>
+          <a href="reservation.html" class="btn btn-outline" style="padding:1rem 2rem;">Réserver une table</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Galerie des créations réelles (Stories / Swipe mobile & Grille haute-couture) ───────────────── -->
+    <section class="creations-gallery" aria-label="Galerie des plats et du lieu">
+      <div class="container">
+        <div class="gallery-header reveal">
+          <span class="section-label">En images</span>
+          <h2 class="gallery-title">Instantanés du Refuge</h2>
+          <p class="gallery-sub">Du grill aux assiettes, de la cave de maturation aux tablées sous les voûtes.</p>
+        </div>
+
+        <div class="gallery-strip-container">
+          <div class="gallery-track" id="gallery-track">
+            <!-- Item 1 -->
+            <article class="gallery-card">
+              <div class="gallery-card-media">
+                <img src="assets/images/plat-gambas-grillees.webp" alt="Gambas grillées au feu et rouille maison" loading="lazy">
+              </div>
+              <div class="gallery-card-info">
+                <span class="gallery-tag">Feu de bois</span>
+                <h3 class="gallery-name">Gambas grillées & rouille relevée</h3>
+              </div>
+            </article>
+
+            <!-- Item 2 -->
+            <article class="gallery-card">
+              <div class="gallery-card-media">
+                <img src="assets/images/plat-risotto-moules.webp" alt="Risotto crémeux aux moules et poutargue" loading="lazy">
+              </div>
+              <div class="gallery-card-info">
+                <span class="gallery-tag">Mer</span>
+                <h3 class="gallery-name">Risotto crémeux, moules & poutargue</h3>
+              </div>
+            </article>
+
+            <!-- Item 3 -->
+            <article class="gallery-card">
+              <div class="gallery-card-media">
+                <img src="assets/images/cave-maturation.jpg" alt="Cave de maturation des viandes du Saint Esprit" loading="lazy">
+              </div>
+              <div class="gallery-card-info">
+                <span class="gallery-tag">Affinage</span>
+                <h3 class="gallery-name">Cave de maturation & terroirs</h3>
+              </div>
+            </article>
+
+            <!-- Item 4 -->
+            <article class="gallery-card">
+              <div class="gallery-card-media">
+                <img src="assets/images/plat-poireaux-brulees.webp" alt="Poireaux confits et brûlés, émulsion et herbes fraîches" loading="lazy">
+              </div>
+              <div class="gallery-card-info">
+                <span class="gallery-tag">Terre</span>
+                <h3 class="gallery-name">Poireaux brûlés & huile d'herbes</h3>
+              </div>
+            </article>
+
+            <!-- Item 5 -->
+            <article class="gallery-card">
+              <div class="gallery-card-media">
+                <img src="assets/images/plat-oeufs-mayo.jpg" alt="Œufs mimosa revisités aux herbes fraîches" loading="lazy">
+              </div>
+              <div class="gallery-card-info">
+                <span class="gallery-tag">Snack</span>
+                <h3 class="gallery-name">Œufs mimosa du Panier aux herbes</h3>
+              </div>
+            </article>
+
+            <!-- Item 6 -->
+            <article class="gallery-card">
+              <div class="gallery-card-media">
+                <img src="assets/images/plat-croustillant.webp" alt="Assiette croustillante, trévise et crème" loading="lazy">
+              </div>
+              <div class="gallery-card-info">
+                <span class="gallery-tag">Partage</span>
+                <h3 class="gallery-name">Croustillant doré & trévise braisée</h3>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── L'Équipe du Saint Esprit ──────────────────────────────── -->
+    <section class="equipe-section" aria-label="L'équipe du restaurant">
+      <div class="container">
+        <div class="equipe-grid">
+          <div class="equipe-media reveal-left">
+            <img src="assets/images/equipe-facade.webp" alt="L'équipe du Saint Esprit réunie devant le 16 rue du Refuge" loading="lazy">
+            <div class="equipe-badge">16 Rue du Refuge · Marseille</div>
+          </div>
+          <div class="equipe-text reveal-right">
+            <span class="section-label">L'équipage</span>
+            <h2>Une bande de passionnés au Panier</h2>
+            <p>
+              Le Saint Esprit, c'est avant tout une aventure humaine. Une brigade complice en cuisine, un accueil franc et attentif en salle, et l'amour inconditionnel du travail bien fait.
+            </p>
+            <p style="margin-top:1rem;">
+              Ici, pas d'artifice ni de discours guindé : on vous reçoit comme des amis, avec le sourire, un verre de vin nature bien choisi et des assiettes qui régalent.
+            </p>
+            <div class="equipe-quote">
+              « Le restaurant, c'est le lieu où la vie de quartier prend tout son sens. »
+            </div>
+            <a href="histoire.html" class="btn btn-outline" style="margin-top:var(--space-lg);">Lire notre histoire</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Réservation bande ────────────────────────────────────── -->
+    <section class="resa-band" aria-label="Réservation rapide">
+      <div class="container">
+        <div class="resa-band-inner">
+          <div class="resa-band-text reveal">
+            <h2>Une table pour ce soir ?</h2>
+            <p>Terrasse ombragée ou salle voûtée — nous vous accueillons du vendredi au lundi.</p>
+          </div>
+          <a href="reservation.html" class="btn btn-primary reveal stagger-2" id="resa-band-link">Réserver maintenant</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <span class="footer-logo">Le Saint Esprit</span>
+          <p class="footer-tagline">Bistronomique sous les voûtes du Panier. Viandes & poissons frais, vins nature, convivialité marseillaise.</p>
+          <address class="footer-address">
+            16 Rue du Refuge<br>
+            13002 Marseille<br>
+            <a href="tel:+33961293043" style="color:var(--color-stone)">09 61 29 30 43</a>
+          </address>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Navigation</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="menu.html">La Carte</a></li>
+            <li><a href="histoire.html">L'Histoire</a></li>
+            <li><a href="reservation.html">Réserver</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-col-title">Horaires</h3>
+          <ul class="footer-hours" aria-label="Horaires d'ouverture">
+            <li><span><span>Vendredi</span><span>12h–14h30 · 19h–23h30</span></span></li>
+            <li><span><span>Sam · Dim · Lun</span><span>12h–14h30 · 19h–23h00</span></span></li>
+            <li><span><span>Mar · Mer · Jeu</span><span>Fermé</span></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Le Saint Esprit · 16 Rue du Refuge, Marseille</span>
+        <span>Mentions légales · Réservations au <a href="tel:+33961293043" style="color:inherit; text-decoration:underline;">09 61 29 30 43</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    main { padding-top: 0; }
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-media { position: absolute; inset: 0; }
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      transform: scale(1.05);
+      transition: transform 8s ease-out;
+    }
+    .hero-img.loaded { transform: scale(1); }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        170deg,
+        rgba(28,20,16,0.65) 0%,
+        rgba(28,20,16,0.35) 45%,
+        rgba(28,20,16,0.75) 100%
+      );
+    }
+    .hero-grain {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      mix-blend-mode: overlay;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding-block: var(--space-3xl) var(--space-2xl);
+      color: #fff;
+    }
+    .hero-eyebrow {
+      display: block;
+      font-size: var(--text-xs);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: var(--space-md);
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out) 0.3s forwards;
+    }
+    .hero-title {
+      font-family: var(--font-logo);
+      font-size: var(--text-hero);
+      font-weight: 400;
+      line-height: 1;
+      color: #ffffff;
+      margin-bottom: var(--space-md);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out) 0.5s forwards;
+    }
+    .hero-sub {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.92);
+      max-width: 560px;
+      line-height: 1.5;
+      margin-bottom: var(--space-xl);
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out) 0.7s forwards;
+    }
+    .hero-actions {
+      display: flex; gap: var(--space-sm); flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out) 0.9s forwards;
+    }
+    .hero-actions .btn-ghost {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+    .hero-actions .btn-ghost:hover,
+    .hero-actions .btn-ghost:focus-visible {
+      background: #ffffff;
+      color: var(--color-bordeaux);
+      border-color: #ffffff;
+      text-shadow: none;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: var(--space-lg);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeIn 1s var(--ease-out) 1.5s forwards;
+    }
+    .scroll-line {
+      display: block;
+      width: 1px; height: 48px;
+      background: rgba(255,255,255,0.45);
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+    .scroll-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.45; }
+      50%       { transform: scaleY(0.6); opacity: 0.2; }
+    }
+
+    /* ── Identity Strip ── */
+    .identity-strip {
+      background: var(--color-surface);
+      padding-block: var(--space-2xl);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .identity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+    .identity-item {
+      text-align: center;
+      padding: var(--space-lg);
+    }
+    .identity-icon {
+      display: block;
+      font-size: 1.5rem;
+      color: var(--color-gold);
+      margin-bottom: var(--space-sm);
+    }
+    .identity-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-sm);
+    }
+    .identity-item p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── Ambiance ── */
+    .ambiance-section {
+      padding-block: var(--space-3xl);
+    }
+    .ambiance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+    .ambiance-heading {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-md);
+    }
+    .ambiance-body {
+      font-size: var(--text-md);
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+    .ambiance-images {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+    }
+    .ambiance-img-main {
+      grid-column: 1 / -1;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 16/10;
+    }
+    .ambiance-img-main img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+    .ambiance-img-main:hover img { transform: scale(1.03); }
+    .ambiance-img-secondary {
+      grid-column: 2 / 3;
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      margin-top: calc(-1 * var(--space-xl));
+      box-shadow: var(--shadow-lg);
+    }
+    .ambiance-img-secondary img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .ambiance-img-caption {
+      position: absolute;
+      bottom: var(--space-sm);
+      left: var(--space-sm);
+      right: var(--space-sm);
+      font-size: var(--text-xs);
+      color: rgba(255,255,255,0.9);
+      background: rgba(0,0,0,0.45);
+      padding: 4px 8px;
+      border-radius: 4px;
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Plat Section ── */
+    .plat-section {
+      background: var(--color-surface);
+      padding-block: var(--space-3xl);
+    }
+    .plat-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+    .plat-img-wrap {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      box-shadow: var(--shadow-md);
+    }
+    .plat-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease-out);
+    }
+    .plat-img-wrap:hover img { transform: scale(1.04); }
+    .plat-label {
+      position: absolute;
+      top: var(--space-md);
+      left: var(--space-md);
+      padding: 0.4rem 1rem;
+      background: var(--color-bordeaux);
+      color: #fff;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+    .plat-text h2 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-md);
+      line-height: 1.2;
+    }
+    .plat-text p { color: var(--color-text-muted); font-size: var(--text-md); line-height: 1.8; }
+    .plat-ctas { margin-top: var(--space-lg); display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+
+    /* ── Galerie Créations (Desktop Grid + Mobile Full-bleed Story Swipe) ── */
+    .creations-gallery {
+      padding-block: var(--space-3xl);
+    }
+    .gallery-header {
+      text-align: center;
+      max-width: 620px;
+      margin-inline: auto;
+      margin-bottom: var(--space-2xl);
+    }
+    .gallery-title {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-xs);
+    }
+    .gallery-sub {
+      color: var(--color-text-muted);
+      font-size: var(--text-md);
+    }
+
+    .gallery-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+    .gallery-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+      display: flex;
+      flex-direction: column;
+    }
+    .gallery-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .gallery-card-media {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: var(--color-border);
+    }
+    .gallery-card-media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+    .gallery-card:hover .gallery-card-media img {
+      transform: scale(1.05);
+    }
+    .gallery-card-info {
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .gallery-tag {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+    }
+    .gallery-name {
+      font-family: var(--font-display);
+      font-size: var(--text-md);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.4;
+    }
+
+    /* ── Équipe Section ── */
+    .equipe-section {
+      background: var(--color-surface);
+      padding-block: var(--space-3xl);
+      border-top: 1px solid var(--color-border);
+    }
+    .equipe-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+    .equipe-media {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow: var(--shadow-lg);
+    }
+    .equipe-media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .equipe-badge {
+      position: absolute;
+      bottom: var(--space-md);
+      left: var(--space-md);
+      background: rgba(28,20,16,0.85);
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: var(--text-xs);
+      letter-spacing: 0.08em;
+      backdrop-filter: blur(4px);
+    }
+    .equipe-text h2 {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-md);
+    }
+    .equipe-text p {
+      color: var(--color-text-muted);
+      font-size: var(--text-md);
+      line-height: 1.8;
+    }
+    .equipe-quote {
+      margin-top: var(--space-lg);
+      padding-left: var(--space-md);
+      border-left: 2px solid var(--color-gold);
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--color-text);
+      font-size: var(--text-md);
+      line-height: 1.6;
+    }
+
+    /* ── Réservation bande ── */
+    .resa-band {
+      background: var(--color-bordeaux);
+      padding-block: var(--space-xl);
+    }
+    .resa-band-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+    .resa-band-text h2 {
+      color: #fff;
+      font-size: var(--text-2xl);
+      margin-bottom: 0.25rem;
+    }
+    .resa-band-text p {
+      color: rgba(255,255,255,0.82);
+      font-size: var(--text-md);
+    }
+    .resa-band .btn-primary {
+      background: #fff;
+      color: var(--color-bordeaux);
+      border-color: #fff;
+    }
+    .resa-band .btn-primary:hover {
+      background: var(--color-surface);
+    }
+
+    /* ── Mobile repensé (Touch & Story format) ── */
+    @media (max-width: 768px) {
+      .hero-title { font-size: clamp(3rem, 14vw, 5rem); }
+      .hero-sub { font-size: var(--text-base); }
+      .hero-sub br { display: none; }
+
+      .identity-grid { grid-template-columns: 1fr; gap: var(--space-md); }
+      .identity-item { text-align: left; padding: var(--space-md) 0; border-bottom: 1px solid var(--color-border); }
+      .identity-item:last-child { border-bottom: none; }
+      .identity-icon { display: inline; margin-right: 0.5rem; }
+
+      .ambiance-grid { grid-template-columns: 1fr; }
+      .ambiance-images {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: var(--space-sm);
+      }
+      .ambiance-img-secondary { grid-column: 1; margin-top: 0; }
+
+      .plat-inner { grid-template-columns: 1fr; }
+      .plat-img-wrap { aspect-ratio: 4/5; }
+
+      /* Galerie Mobile : Full bleed story swipe avec snap tactile */
+      .creations-gallery .container { padding-inline: 0; }
+      .gallery-header { padding-inline: var(--space-md); text-align: left; }
+      .gallery-track {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: var(--space-md);
+        padding-inline: var(--space-md);
+        padding-bottom: var(--space-md);
+        scrollbar-width: none;
+      }
+      .gallery-track::-webkit-scrollbar { display: none; }
+      .gallery-card {
+        flex: 0 0 82vw;
+        scroll-snap-align: center;
+        border-radius: var(--radius-lg);
+      }
+      .gallery-card-media {
+        aspect-ratio: 3/4;
+      }
+
+      .equipe-grid { grid-template-columns: 1fr; }
+      .equipe-media { aspect-ratio: 4/5; }
+
+      .resa-band-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+
+  <script>
+    // ── Sticky header ──
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Hero image zoom on load ──
+    const heroImg = document.querySelector('.hero-img');
+    if (heroImg) {
+      heroImg.addEventListener('load', function() {
+        this.classList.add('loaded');
+      });
+      if (heroImg.complete) {
+        heroImg.classList.add('loaded');
+      }
+    }
+
+    // ── Menu mobile (drawer) ──
+    const burger = document.getElementById('nav-burger');
+    const drawer = document.getElementById('nav-drawer');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    burger.addEventListener('click', () => {
+      burger.getAttribute('aria-expanded') === 'false' ? openDrawer() : closeDrawer();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+    // ── Reveal au scroll (IntersectionObserver) ──
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+    setTimeout(() => {
+      revealEls.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight + 100) el.classList.add('visible');
+      });
+    }, 150);
+  </script>
+</body>
+</html>

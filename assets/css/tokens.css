@@ -1,0 +1,81 @@
+/* ================================================================
+   LE SAINT ESPRIT — Design Tokens
+   Palette : Pierre chaude · Crème · Bordeaux · Vert encre
+   ================================================================ */
+
+:root {
+  /* Couleurs */
+  --color-bg: #F5F0E6;
+  /* Crème parchemin — voûte éclairée */
+  --color-surface: #EDE6D6;
+  /* Sable chaud légèrement plus foncé */
+  --color-stone: #C8AA82;
+  /* Pierre chaude des voûtes */
+  --color-bordeaux: #6B2737;
+  /* Bordeaux profond — vin nature */
+  --color-bordeaux-light: #8B3A4D;
+  /* Bordeaux hover */
+  --color-encre: #2C3A2E;
+  /* Vert encre — ardoise du jour */
+  --color-text: #1C1410;
+  /* Brun-noir chaleureux */
+  --color-text-muted: #7A6A5A;
+  /* Taupe discret */
+  --color-text-light: #A0917F;
+  /* Pierre légère */
+  --color-gold: #B8965A;
+  /* Or doux — séparateur */
+  --color-border: rgba(140, 110, 70, 0.18);
+
+  /* Typographies */
+  --font-logo: 'Brush Script MT', 'Brush Script Std', 'Dancing Script', cursive;
+  /* Logotype brush script */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  /* Titres de section */
+  --font-body: 'Inter', system-ui, sans-serif;
+  /* Corps de texte */
+
+  /* Échelle typographique */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 3rem;
+  --text-4xl: 4rem;
+  --text-hero: clamp(3.5rem, 10vw, 7rem);
+
+  /* Espacement */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* Rayons */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+
+  /* Ombres */
+  --shadow-sm: 0 2px 8px rgba(28, 20, 16, 0.08);
+  --shadow-md: 0 8px 32px rgba(28, 20, 16, 0.14);
+  --shadow-lg: 0 20px 60px rgba(28, 20, 16, 0.20);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --duration: 0.5s;
+  --duration-fast: 0.25s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration: 0.01ms;
+    --duration-fast: 0.01ms;
+  }
+}
