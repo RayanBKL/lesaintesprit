@@ -6,6 +6,26 @@
       "source": "/index",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/(menu|carte)(.html)?",
+      "destination": "/#carte",
+      "permanent": true
+    },
+    {
+      "source": "/histoire(.html)?",
+      "destination": "/#histoire",
+      "permanent": true
+    },
+    {
+      "source": "/reservation(.html)?",
+      "destination": "/#reservation",
+      "permanent": true
     }
   ],
   "headers": [

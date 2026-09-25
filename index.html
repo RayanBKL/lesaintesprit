@@ -702,29 +702,94 @@
   </footer>
 
   <script>
-    // ── SPA ROUTER ──
-    const PAGES = {'':'page-accueil','accueil':'page-accueil','carte':'page-carte','histoire':'page-histoire','reservation':'page-reservation'};
-    const NAV_MAP = {'':'nav-accueil','accueil':'nav-accueil','carte':'nav-carte','histoire':'nav-histoire','reservation':'nav-reservation'};
-    const PAGE_TITLES = {'page-accueil':'Le Saint Esprit — Bistronomique · Le Panier, Marseille','page-carte':'La Carte — Le Saint Esprit · Marseille','page-histoire':"L'Histoire — Le Saint Esprit · Marseille",'page-reservation':'Réserver — Le Saint Esprit · Marseille'};
-
-    function getHash(){ return (location.hash||'#').replace('#','').toLowerCase(); }
-
-    function showPage(hash){
-      const pageId = PAGES[hash]||'page-accueil';
-      document.querySelectorAll('.spa-page').forEach(p=>p.classList.remove('active'));
-      const page = document.getElementById(pageId);
-      if(page){ page.classList.add('active'); window.scrollTo({top:0,behavior:'instant'}); }
-      document.querySelectorAll('.nav-links a, .nav-drawer a').forEach(a=>{a.classList.remove('nav-active');a.removeAttribute('aria-current');});
-      const activeLink = document.getElementById(NAV_MAP[hash]||'nav-accueil');
-      if(activeLink){activeLink.classList.add('nav-active');activeLink.setAttribute('aria-current','page');}
-      const header = document.getElementById('site-header');
-      if(pageId==='page-accueil'){header.classList.add('header-transparent');header.classList.toggle('scrolled',window.scrollY>40);}
-      else{header.classList.remove('header-transparent');header.classList.add('scrolled');}
-      document.title = PAGE_TITLES[pageId]||PAGE_TITLES['page-accueil'];
-      setTimeout(()=>{initReveal();if(pageId==='page-accueil')initHeroImg();},60);
+    // ── SPA ROUTER & URL CLEANER ──
+    // Supprimer /index.html de la barre d'adresse instantanément
+    if (window.location.pathname.endsWith('index.html')) {
+      const cleanPath = window.location.pathname.replace(/index\.html$/, '');
+      const initialHash = window.location.hash || '';
+      window.history.replaceState(null, '', cleanPath + initialHash);
     }
 
-    window.addEventListener('hashchange',()=>showPage(getHash()));
+    const PAGES = {
+      '': 'page-accueil',
+      'accueil': 'page-accueil',
+      'carte': 'page-carte',
+      'menu': 'page-carte',
+      'histoire': 'page-histoire',
+      'reservation': 'page-reservation'
+    };
+    const NAV_MAP = {
+      '': 'nav-accueil',
+      'accueil': 'nav-accueil',
+      'carte': 'nav-carte',
+      'menu': 'nav-carte',
+      'histoire': 'nav-histoire',
+      'reservation': 'nav-reservation'
+    };
+    const PAGE_TITLES = {
+      'page-accueil': 'Le Saint Esprit — Bistronomique · Le Panier, Marseille',
+      'page-carte': 'La Carte — Le Saint Esprit · Marseille',
+      'page-histoire': "L'Histoire — Le Saint Esprit · Marseille",
+      'page-reservation': 'Réserver — Le Saint Esprit · Marseille'
+    };
+
+    function getHash(){ 
+      return (location.hash || '').replace(/^#\/?/, '').toLowerCase(); 
+    }
+
+    function showPage(hash){
+      const pageId = PAGES[hash] || 'page-accueil';
+      document.querySelectorAll('.spa-page').forEach(p => p.classList.remove('active'));
+      const page = document.getElementById(pageId);
+      if(page){ 
+        page.classList.add('active'); 
+        window.scrollTo({ top: 0, behavior: 'instant' }); 
+      }
+      
+      document.querySelectorAll('.nav-links a, .nav-drawer a').forEach(a => {
+        a.classList.remove('nav-active');
+        a.removeAttribute('aria-current');
+      });
+      const activeLink = document.getElementById(NAV_MAP[hash] || 'nav-accueil');
+      if(activeLink){
+        activeLink.classList.add('nav-active');
+        activeLink.setAttribute('aria-current', 'page');
+      }
+
+      const header = document.getElementById('site-header');
+      if(pageId === 'page-accueil'){
+        header.classList.add('header-transparent');
+        header.classList.toggle('scrolled', window.scrollY > 40);
+        if(window.location.hash === '#' || window.location.hash === '#accueil' || window.location.hash === '#/'){
+          window.history.replaceState(null, '', window.location.pathname);
+        }
+      } else {
+        header.classList.remove('header-transparent');
+        header.classList.add('scrolled');
+      }
+
+      document.title = PAGE_TITLES[pageId] || PAGE_TITLES['page-accueil'];
+      setTimeout(() => {
+        initReveal();
+        if(pageId === 'page-accueil') initHeroImg();
+      }, 60);
+    }
+
+    window.addEventListener('hashchange', () => showPage(getHash()));
+    window.addEventListener('popstate', () => showPage(getHash()));
+
+    // Interception des clics retour accueil pour une URL propre sans hash
+    document.querySelectorAll('a[href="#"], #nav-accueil, .site-logo a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        if(window.location.hash){
+          window.history.pushState(null, '', window.location.pathname);
+        }
+        showPage('');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        closeDrawer();
+      });
+    });
 
     // Sticky header
     const header = document.getElementById('site-header');

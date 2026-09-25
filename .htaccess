@@ -1,0 +1,39 @@
+# ================================================================
+# Le Saint Esprit — Configuration Apache / LiteSpeed (Hostinger)
+# ================================================================
+
+RewriteEngine On
+RewriteBase /
+
+# 1. Rediriger /index.html vers la racine / (évite l'URL avec index.html)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html[?\s] [NC]
+RewriteRule ^index\.html$ / [R=301,L]
+
+# 2. Rediriger les anciennes URLs de pages vers le format SPA (#carte, #histoire, #reservation)
+RewriteRule ^(menu|carte)(\.html)?$ /#carte [R=301,NE,L]
+RewriteRule ^histoire(\.html)?$ /#histoire [R=301,NE,L]
+RewriteRule ^reservation(\.html)?$ /#reservation [R=301,NE,L]
+
+# 3. En-têtes de sécurité
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# 4. Compression Gzip / Deflate pour performances
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# 5. Caching des assets statiques
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
