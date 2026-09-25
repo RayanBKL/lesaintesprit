@@ -16,16 +16,15 @@ Sous les voûtes de pierre séculaires d'un ancien fournil au cœur du quartier 
 
 ```text
 .
-├── index.html              # Page d'accueil (Hero salle voûtée, identité, ambiance, aperçu carte, galerie)
-├── menu.html               # Carte complète (Snacks & partage, assiettes du marché, viandes & poissons)
-├── histoire.html           # Histoire du lieu (L'ancien fournil, l'héritage du Panier, l'équipe)
-├── reservation.html        # Module de réservation en ligne & carte d'accès Google Maps interactive
+├── index.html              # Application SPA complète (#accueil, #carte, #histoire, #reservation)
+├── .htaccess               # Configuration Apache / LiteSpeed (Hostinger) : clean URLs, 301, sécurité & cache
+├── vercel.json             # Configuration Vercel : clean URLs, redirections 301 & en-têtes
+├── _headers                # En-têtes de sécurité (Cloudflare Pages / Netlify)
 ├── assets/
 │   ├── css/
 │   │   ├── tokens.css      # Design tokens (Palette bordeaux/or, typographie, espacements)
 │   │   └── main.css        # Styles globaux, layout, navigation & composants responsive
-│   └── images/             # Photographies compressées et optimisées (WebP & JPG haute fidélité)
-├── photos_originales/      # Visuels et archives sources
+│   └── images/             # Photographies optimisées WebP (< 150KB par image) & Favicon
 └── README.md
 ```
 
