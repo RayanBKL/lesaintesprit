@@ -36,7 +36,7 @@
   </script>
 
   <link rel="stylesheet" href="assets/css/tokens.css?v=9">
-  <link rel="stylesheet" href="assets/css/main.css?v=9">
+  <link rel="stylesheet" href="assets/css/main.css?v=10">
 </head>
 <body>
 
@@ -394,9 +394,18 @@
         <div>
           <h3 class="footer-col-title">Horaires</h3>
           <ul class="footer-hours" aria-label="Horaires d'ouverture">
-            <li><span><span>Vendredi</span><span>12h–14h30 · 19h–23h30</span></span></li>
-            <li><span><span>Sam · Dim · Lun</span><span>12h–14h30 · 19h–23h00</span></span></li>
-            <li><span><span>Mar · Mer · Jeu</span><span>Fermé</span></span></li>
+            <li class="footer-hours-item">
+              <span class="hours-day">Vendredi</span>
+              <span class="hours-time">12h00 – 14h30 · 19h00 – 23h30</span>
+            </li>
+            <li class="footer-hours-item">
+              <span class="hours-day">Sam · Dim · Lun</span>
+              <span class="hours-time">12h00 – 14h30 · 19h00 – 23h00</span>
+            </li>
+            <li class="footer-hours-item closed">
+              <span class="hours-day">Mar · Mer · Jeu</span>
+              <span class="hours-time">Fermé</span>
+            </li>
           </ul>
         </div>
       </div>
